@@ -1,0 +1,365 @@
+//FORM HTML VISUALIZZARE IN POST
+//HTML
+<form action="esempio.php" method="post">
+	Name: <input type="text" name="name" /><br />
+        E-mail: <input type="text" name="email" /><br />
+        <input type="submit" />
+</form>
+//PHP
+<html>
+<body>
+Welcome <?php echo $_POST["name"]; ?><br>
+Your email address is: <?php echo $_POST["email"]; ?>
+</body>
+</html>
+
+//SCOPE
+$nome = 'io';
+function saluta() {
+    $GLOBALS['nome'] = 'tu';
+    echo $GLOBALS['nome'];
+}
+saluta();
+echo ' ' . $nome; //tu tu
+
+//COSTANTI
+define('INDIRIZZO', 'Piazza');
+const ADDRESS = 'Viale'; //No definibile nelle funzioni
+
+//TIPI DI DATI
+$nome2 = 'luca';
+$eta = 24;
+$temperatura = 36.87;
+$is_online = true;
+$interessi = ['calcio', 'bascket'];
+$altro = null;
+class Persona {
+    public $nome;
+    public $cognome;
+    public function _construct($nome, $cognome){
+        $this->nome = $nome;
+        $this->cognome = $cognome;
+    }
+}
+$persona1 = new Persona('orazio', 'rossi');
+
+//STRINGHE
+$frase = 'lorem ipsum dolor sit';
+$frase2 = 'l\'albero';
+echo $frase . $frase2;
+echo strlen($frase); //lunghezza partendo da 0
+echo strtolower($frase);
+echo strtoupper($frase);
+echo trim($frase); //rimuovere spazi bianchi
+echo str_word_count($frase); //numero parole
+echo strrev($frase); //frase al contrario
+echo strpos($frase, 'ipsum'); //n carattere in cui inizia la parola
+echo substr($frase, 12, 5); //parti dal carattere 12 e prendi 5 caratteri
+echo str_replace('ipsum', 'ciao', $frase); //sostituisce ipsum con ciao
+
+//NUMERI
+$operatore1 = 5;
+$operatore2 = 5.10;
+$operatore3 = '10'; //non è int
+echo $operatore1 + $operatore3; //13 in js sarebbe 510
+$operatore3 = (int)'10'; 
+echo abs($operatore1); //numeri - diventano +
+echo min(5, 45, 34);
+echo max(5, 45, 34);
+echo sqrt(9);
+echo round($operatore2); //0.50 è in eccesso
+echo rand(0, 10); //numero randomico da 0 a 10
+
+//ARRAY
+$citta = ['milano', 'firenze', 'roma'];
+$citta[1] = 'napoli';
+sort($citta); //ordine alfabetico
+rsort($citta); //ordine alfabetico contrario
+array_push($citta, 'firenze'); //aggiungo elemento in coda
+array_pop($citta); //toglie ultimo elemento
+array_unshift($citta, 'napoli'); //inserisco elemento davanti
+array_shift($citta); //toglie primo elemento
+
+//ARRAY ASSOCIATIVI CON CHIAVE VALORE
+$persona = [
+    "nome" => "Luca",
+    "cognome" => "Rossi",
+    "eta" => 23
+];
+echo $persona["nome"];
+foreach($persona as $chiave => $valore){
+    echo $chiave . ' => ' . $valore . "<br>";
+}
+ksort($persona); //ordine per chiave alfabetica
+krsort($persona); //orine per chiave alfabetico contrario  
+asort($persona); //ordine per valore alfabetica
+arsort($persona); //orine per valore alfabetico contrario
+//ARRAY MULTIDIMENSIONALI
+$classi = [
+    ["Luca", "Marco", "Anna"],
+    ["Leonardo", "Mattia", "Paolo"]
+];
+echo $classi[0][1];
+for ($i=0; $i<count($classi); $i++){
+    echo "Classe: " . $i . "<br>";
+    for($y=0; $y<count($classi[$i]); $y++){
+        echo $classi[$i][$y] . "<br>";
+    }
+}
+
+//IF ELSE
+//PHP
+$nome = 'luca';
+if ($nome == 'luca'){
+    echo 'ciao luca';
+} elseif ($nome == 'carlo') {
+    echo 'ciao carlo';  
+} else {
+    echo 'non sei luca';
+}
+//HTML
+<body>
+    <?php $numero = 5;?>
+    <?php if($numero==0): ?>
+        <p>condizione verificata</p>
+    <?php elseif ($numero==5): ?>
+        <p>condizione2 verificata</p>
+    <?php else: ?>
+        <p>default</p>
+    <?php endif; ?>
+</body>
+
+//SWITCH
+$numeri = 21;
+switch($numeri){
+    case 1:
+        echo '1';
+        break;
+    case 2:
+        echo '2';
+        break;
+    default:
+        echo 'ciao';
+}
+
+//FOR E FOREACH
+//PHP
+for ($i=0; $i<10; $i++){
+    if($i == 3){
+        continue;
+    }
+    if($i == 4){
+        break;
+    }
+    echo $i;
+}
+$persona = [
+    "nome" => "luca",
+    "cognome" => "rossi",
+    "eta" => 15,
+];
+foreach($persona as $chiave => $valore){
+    echo $valore . "<br>";
+}
+//HTML
+<body>
+    <ul>
+        <?php for($i=0; $i<5; $i++) : ?>
+            <li>list item <?php echo $i ?></li>
+        <?php endfor; ?>
+    </ul>
+</body>
+
+//WHILE
+$i=0;
+while ($i<5){
+    echo $i;
+    $i++;
+}
+
+//DO WHILE
+$i=0;
+do {
+    echo $i;
+    $i++;
+}while($i<5);
+
+//FUNZIONE
+function funzione1(){
+    echo 'funzione';
+}
+funzione1();
+
+//FUNZIONE ANONIMA
+$prova = function(){
+    echo 'prova';
+};
+$prova();
+
+//SCOPE FUNZIONI
+$numero = 5;
+function funzione2(){
+    //$GLOBALS['numero'] = 10; echo $GLOBALS['numero'];
+    $numero = 10;
+    echo $numero;
+}
+funzione2(); //10
+echo $numero; //5
+
+//FUNZIONE VALORI
+function somma(int $valore1, $valore2, $valore3=100): int{
+    $somma = $valore1 + $valore2 + $valore3;
+    return $somma;
+}
+$somma = somma(1, 2);
+
+//REQUIRE E INCLUDE
+<?php require 'esempio.php'
+//require ci da errore se file non presente
+//include non da errore se file non presente
+//_once evita errori con duplicati
+?>
+<?php include 'menu.html'; ?>
+//ESEMPIO
+<?php require 'esempio.php'
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+...
+</head>
+<body>
+    <?php include 'menu.html'; ?>
+    <h1>homepage</h1>
+    <?php saluta(); ?>
+</body>
+</html>
+
+//FROM GET E POST
+//HTML
+    <!-- con GET http://localhost:81/PHP/PHP2/05)%20form%20get%20e%20post/esempio.php?nome=ANGELO&cognome=DALO-->
+    <!--appendo cose all'url-->
+    <form action="esempioGet.php" method="GET">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome">
+        <label for="cognome">Cognome</label>
+        <input type="text" name="cognome" id="cognome">
+        <input type="submit" value="invia modulo">
+    </form>
+
+    <!--con POST dati non mostrati nell'url-->
+    <form action="esempioPost.php" method="POST">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome">
+        <label for="cognome">Cognome</label>
+        <input type="text" name="cognome" id="cognome">
+        <input type="submit" value="invia modulo">
+    </form>
+//PHP GET
+$nome = $_GET['nome'];
+$cognome = $_GET['cognome'];
+echo 'ciao ' . $nome . ' ' . $cognome;
+//PHP POST
+$nome = $_POST['nome'];
+$cognome = $_POST['cognome'];
+echo 'ciao ' . $nome . ' ' . $cognome;
+
+//CARICAMENTO FILE IMMAGINE
+//INDEX FORM
+<body>
+    <form action="esempio.php" method="POST" enctype="multipart/form-data">
+        <h2>carica file</h2>
+        <label for="fileSelect">file:</label>
+        <input type="file" name="photo" id="fileSelect">
+        <input type="submit" name="submit" value="Carica">
+        <p><strong>Nota:</strong>sono permessi formati .jpg .jpeg .gif .png</p>
+    </form>
+</body>
+//PHP BACKEND
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(isset($_FILES["photo"]) && $_FILES["photo"]["error"]==0){
+        $estensioni_permesse = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+        print_r($_FILES["photo"]);
+        $nome_file = $_FILES["photo"]["name"];
+        $tipo_file = $_FILES["photo"]["type"];
+        $dimensione_file = $_FILES["photo"]["size"];
+
+        //verifichiamo estensione file
+        $estensione = pathinfo($nome_file, PATHINFO_EXTENSION);
+        if(!array_key_exists($estensione, $estensioni_permesse)) die ("ERRORE SELEZIONA UN FORMATO VALIDO");
+
+        //verifichiamo dimensione
+        $dimensione_massima = 5*1024*1024;
+        if($dimensione_file > $dimensione_massima) die ("ERRORE SELEZIONE UNA GRANDEZZA MINORE");
+
+        //verifichiamo il tipo MIME
+        if(in_array($tipo_file, $estensioni_permesse)){
+            //controllare se il file esiste già
+            if(file_exists("upload/" . $nome_file)){
+                echo $nome_file . "esiste già";
+            } else {
+                move_uploaded_file($_FILES["photo"]["tmp_name"], "upload/" . $nome_file);
+                echo "il tuo file è stato caricato con successo";
+            }
+        } else {
+            echo "ERRORE CARICAMENTE RIPROVARE";
+        }
+    } else {
+        echo "ERRORE" . $_FILES["photo"]["error"];
+    }
+}
+
+//CLASSI
+class Persona {
+    public $nome;
+    public $cognome;
+    protected $eta;
+    private $telefono;
+
+    //costruttore
+    function __construct($nome, $cognome){
+        $this->nome = $nome;
+        $this->cognome = $cognome;
+    }
+
+    //Get e Set
+    function set_nome($nome){
+        $this->nome = $nome;
+    }
+    function get_nome(){
+        return $this->nome;
+    }
+
+    function set_cognome($cognome){
+        $this->cognome = $cognome;
+    }
+    function get_cognome(){
+        return $this->cognome;
+    }
+
+    function set_eta($eta){
+        $this->eta = $eta;
+    }
+    function get_eta(){
+        return $this->eta;
+    }
+
+    function set_telefono($telefono){
+        $this->telefono = $telefono;
+    }
+    function get_telefono(){
+        return $this->telefono;
+    }
+
+    //metodo
+    function saluta(){
+        echo "ciao sono" . $this->nome . $this->cognome; 
+    }
+}
+
+$persona1 = new Persona("luca", "rossi");
+$persona1->set_eta(24);
+echo $persona1->get_nome();
+// $persona1->nome = 'luca';
+// $persona1->cognome = 'rossi';
+// $persona1->saluta();
